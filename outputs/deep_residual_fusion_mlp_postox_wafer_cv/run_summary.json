@@ -1,0 +1,28 @@
+{
+  "model": "Residual DeepFusionMLP (two encoders + fused decoder)",
+  "prediction_parameterization": "post-process minus incoming thickness, then add incoming thickness back",
+  "validation": "5-fold shuffled wafer-level CV; inner validation and early stopping per fold",
+  "wafers": 88,
+  "spatial_input_shape": [
+    88,
+    88
+  ],
+  "process_sequence_shape": [
+    88,
+    64,
+    31
+  ],
+  "process_summary_shape": [
+    88,
+    124
+  ],
+  "target_shape": [
+    88,
+    88
+  ],
+  "parameter_count": 28120,
+  "oof_rmse": 0.04675084954001601,
+  "oof_mae": 0.02234293531831301,
+  "oof_r2_global": 0.6254917674955774,
+  "oof_r2_mean_location": 0.5733802174514199
+}

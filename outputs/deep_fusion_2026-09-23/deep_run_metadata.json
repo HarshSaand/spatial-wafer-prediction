@@ -1,0 +1,70 @@
+{
+  "matched_wafers": 88,
+  "lots": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "input_spatial": [
+    88,
+    88
+  ],
+  "input_process": [
+    88,
+    64,
+    31
+  ],
+  "target": [
+    88,
+    88
+  ],
+  "process_signals": [
+    "Stat3_Etch_MV_EpdIntensity",
+    "Stat3_Etch_MV_ForeLinePressure",
+    "Stat3_Etch_MV_Gas1Flow",
+    "Stat3_Etch_MV_Gas2Flow",
+    "Stat3_Etch_MV_Gas3Flow",
+    "Stat3_Etch_MV_Gas4Flow",
+    "Stat3_Etch_MV_Gas5Flow",
+    "Stat3_Etch_MV_Gas7Flow",
+    "Stat3_Etch_MV_Gas8Flow",
+    "Stat3_Etch_MV_Heater1Temp",
+    "Stat3_Etch_MV_Heater2Temp",
+    "Stat3_Etch_MV_Heater3Temp",
+    "Stat3_Etch_MV_Heater4Temp",
+    "Stat3_Etch_MV_HeliumBPFlow",
+    "Stat3_Etch_MV_HeliumBPPressure",
+    "Stat3_Etch_MV_PlatenDcBias",
+    "Stat3_Etch_MV_PlatenRFLoadCapacitor",
+    "Stat3_Etch_MV_PlatenRFLoadPower",
+    "Stat3_Etch_MV_PlatenRFPeakToPeak",
+    "Stat3_Etch_MV_PlatenRFReflectedPower",
+    "Stat3_Etch_MV_PlatenRFTuningCapacitor",
+    "Stat3_Etch_MV_Pressure",
+    "Stat3_Etch_MV_SourceRF2LoadPower",
+    "Stat3_Etch_MV_SourceRF2PeakToPeak",
+    "Stat3_Etch_MV_SourceRF2ReflectedPower",
+    "Stat3_Etch_MV_SourceRF2TuningCapacitor",
+    "Stat3_Etch_MV_SourceRFLoadPower",
+    "Stat3_Etch_MV_SourceRFPeakToPeak",
+    "Stat3_Etch_MV_SourceRFReflectedPower",
+    "Stat3_Etch_MV_SourceRFTuningCapacitor",
+    "Stat3_Etch_MV_moriInnerCurrent"
+  ],
+  "architecture": "88->48->24 spatial MLP; 31x64 temporal Conv1D encoder; fusion MLP -> 88 outputs (residual for models with spatial input)",
+  "parameter_counts": {
+    "spatial_only": 17824,
+    "process_only": 17824,
+    "fused_spatial_process": 18976
+  },
+  "seed": 42,
+  "early_stopping_patience": 40,
+  "leakage_control": "imputation, scaling and residual target normalization fitted within each outer training fold"
+}

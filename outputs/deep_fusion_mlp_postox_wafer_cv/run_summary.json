@@ -1,0 +1,27 @@
+{
+  "model": "DeepFusionMLP (two encoders + fused decoder)",
+  "validation": "5-fold shuffled wafer-level CV; inner validation and early stopping per fold",
+  "wafers": 88,
+  "spatial_input_shape": [
+    88,
+    88
+  ],
+  "process_sequence_shape": [
+    88,
+    64,
+    31
+  ],
+  "process_summary_shape": [
+    88,
+    124
+  ],
+  "target_shape": [
+    88,
+    88
+  ],
+  "parameter_count": 28120,
+  "oof_rmse": 0.04657824559310127,
+  "oof_mae": 0.022414076111966056,
+  "oof_r2_global": 0.6282520283873614,
+  "oof_r2_mean_location": 0.564037716192687
+}

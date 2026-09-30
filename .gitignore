@@ -1,0 +1,19 @@
+.DS_Store
+:memory:.ses
+__pycache__/
+*.py[cod]
+
+# Local Python environments and runtime caches
+.venv/
+venv/
+work/*
+!work/public_data/
+!work/public_data/**
+
+# Progress reports remain local
+outputs/*.docx
+outputs/*report*.md
+outputs/supervisor_update*.md
+
+# Local render and document-authoring artifacts
+*.pdf~

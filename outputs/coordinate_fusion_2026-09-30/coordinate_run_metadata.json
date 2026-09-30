@@ -1,0 +1,61 @@
+{
+  "matched_wafers": 88,
+  "lots": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "coordinate_features": [
+    "normalized_x",
+    "normalized_y",
+    "normalized_radius"
+  ],
+  "architecture": "shared point MLP on [thickness,x,y,radius], global mean/max pooling, temporal Conv1D process encoder, pointwise residual decoder",
+  "parameter_counts": {
+    "coordinate_spatial_only": 9121,
+    "coordinate_fused": 10081,
+    "graph_feature_fused": 23200
+  },
+  "validation": "shuffled five-fold wafer cross-validation with fold-only preprocessing and out-of-fold predictions",
+  "process_signals": [
+    "Stat3_Etch_MV_EpdIntensity",
+    "Stat3_Etch_MV_ForeLinePressure",
+    "Stat3_Etch_MV_Gas1Flow",
+    "Stat3_Etch_MV_Gas2Flow",
+    "Stat3_Etch_MV_Gas3Flow",
+    "Stat3_Etch_MV_Gas4Flow",
+    "Stat3_Etch_MV_Gas5Flow",
+    "Stat3_Etch_MV_Gas7Flow",
+    "Stat3_Etch_MV_Gas8Flow",
+    "Stat3_Etch_MV_Heater1Temp",
+    "Stat3_Etch_MV_Heater2Temp",
+    "Stat3_Etch_MV_Heater3Temp",
+    "Stat3_Etch_MV_Heater4Temp",
+    "Stat3_Etch_MV_HeliumBPFlow",
+    "Stat3_Etch_MV_HeliumBPPressure",
+    "Stat3_Etch_MV_PlatenDcBias",
+    "Stat3_Etch_MV_PlatenRFLoadCapacitor",
+    "Stat3_Etch_MV_PlatenRFLoadPower",
+    "Stat3_Etch_MV_PlatenRFPeakToPeak",
+    "Stat3_Etch_MV_PlatenRFReflectedPower",
+    "Stat3_Etch_MV_PlatenRFTuningCapacitor",
+    "Stat3_Etch_MV_Pressure",
+    "Stat3_Etch_MV_SourceRF2LoadPower",
+    "Stat3_Etch_MV_SourceRF2PeakToPeak",
+    "Stat3_Etch_MV_SourceRF2ReflectedPower",
+    "Stat3_Etch_MV_SourceRF2TuningCapacitor",
+    "Stat3_Etch_MV_SourceRFLoadPower",
+    "Stat3_Etch_MV_SourceRFPeakToPeak",
+    "Stat3_Etch_MV_SourceRFReflectedPower",
+    "Stat3_Etch_MV_SourceRFTuningCapacitor",
+    "Stat3_Etch_MV_moriInnerCurrent"
+  ],
+  "seed": 42
+}
