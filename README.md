@@ -82,6 +82,14 @@ python src/run_coordinate_fusion.py \
   --output-dir outputs/coordinate_fusion_run
 ```
 
+Run the graph-neighbourhood sensitivity comparison:
+
+```bash
+python src/run_graph_neighbour_sweep.py \
+  --data-dir work/public_data \
+  --output-dir outputs/graph_neighbour_sweep_run
+```
+
 Rebuild the common benchmark and per-fold wafer-level metrics:
 
 ```bash
@@ -96,6 +104,10 @@ python src/run_phase1_benchmark.py
   contains mean and median wafer-level R² for every model and fold.
 - `outputs/coordinate_fusion_2026-09-30/` contains out-of-fold predictions,
   model metadata and the representative spatial output.
+- `outputs/graph_neighbour_sweep_2026-09-30/graph_neighbour_summary.csv`
+  compares three, six and ten neighbours using uniform and inverse-distance
+  weighting. Uniform six-neighbour averaging has the best RMSE and mean
+  wafer-level R² among these graph variants.
 - `outputs/deep_fusion_2026-09-23/` contains the previous temporal fusion run.
 
 Progress reports are intentionally excluded from this repository and retained

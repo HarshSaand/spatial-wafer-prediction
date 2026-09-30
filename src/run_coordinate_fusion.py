@@ -89,13 +89,19 @@ class CoordinateFusionNet(nn.Module):
 class GraphFeatureFusionNet(nn.Module):
     """Flat residual predictor augmented with coordinate-derived neighbours."""
 
-    def __init__(self, coordinates, neighbours=6):
+    def __init__(self, coordinates, neighbours=6, distance_weighted=False):
         super().__init__()
         xy = torch.tensor(coordinates, dtype=torch.float32)
         distance = torch.cdist(xy, xy)
         nearest = distance.argsort(dim=1)[:, 1:neighbours + 1]
         adjacency = torch.zeros(len(xy), len(xy))
-        adjacency.scatter_(1, nearest, 1.0 / neighbours)
+        if distance_weighted:
+            selected_distance = distance.gather(1, nearest).clamp_min(1e-8)
+            weights = selected_distance.reciprocal()
+            weights = weights / weights.sum(dim=1, keepdim=True)
+        else:
+            weights = torch.full_like(nearest, 1.0 / neighbours, dtype=torch.float32)
+        adjacency.scatter_(1, nearest, weights)
         self.register_buffer("adjacency", adjacency)
         self.spatial = nn.Sequential(
             nn.Linear(176, 48), nn.LayerNorm(48), nn.GELU(), nn.Dropout(0.15),
@@ -172,8 +178,18 @@ def train_fold(spatial, process, target, coords, raw_coordinates, train_idx, tes
         model = CoordinateFusionNet(fused=False)
     elif model_name == "coordinate_fused":
         model = CoordinateFusionNet(fused=True)
-    else:
+    elif model_name == "graph_feature_fused":
         model = GraphFeatureFusionNet(raw_coordinates)
+    elif model_name.startswith("graph_uniform_k"):
+        neighbours = int(model_name.rsplit("k", 1)[1])
+        model = GraphFeatureFusionNet(raw_coordinates, neighbours=neighbours)
+    elif model_name.startswith("graph_distance_k"):
+        neighbours = int(model_name.rsplit("k", 1)[1])
+        model = GraphFeatureFusionNet(
+            raw_coordinates, neighbours=neighbours, distance_weighted=True
+        )
+    else:
+        raise ValueError(f"Unknown model name: {model_name}")
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=3e-3)
     loss_fn = nn.SmoothL1Loss(beta=0.5)
     coord_tensor = torch.tensor(coords, dtype=torch.float32)

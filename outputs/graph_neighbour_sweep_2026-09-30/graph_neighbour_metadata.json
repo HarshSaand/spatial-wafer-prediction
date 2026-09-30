@@ -1,0 +1,22 @@
+{
+  "matched_wafers": 88,
+  "models": [
+    "graph_uniform_k3",
+    "graph_uniform_k6",
+    "graph_uniform_k10",
+    "graph_distance_k3",
+    "graph_distance_k6",
+    "graph_distance_k10"
+  ],
+  "neighbour_counts": [
+    3,
+    6,
+    10
+  ],
+  "weighting": [
+    "uniform",
+    "inverse distance normalized per point"
+  ],
+  "validation": "five fold wafer cross validation with per wafer R squared",
+  "seed": 42
+}
