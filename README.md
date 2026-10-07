@@ -39,12 +39,16 @@ Files:
 - Flat residual MLP–Conv1D temporal fusion.
 - Coordinate-point fusion using thickness, x, y and radius.
 - Graph-feature fusion using each location's six nearest physical neighbours.
+- Region-aware graph fusion with separate centre, middle and edge heads.
+- Mean-shape graph fusion with separate wafer-mean and zero-mean shape heads.
+- Fixed equal-weight ensemble of the flat MLP–Conv1D and mean-shape graph model.
 
 ## Main wafer-level results
 
 | Model | RMSE µm | Mean wafer R² | Median wafer R² | Positive wafer R² |
 |---|---:|---:|---:|---:|
 | Extra Trees fusion | 0.0391 | 0.583 | 0.742 | 92.0% |
+| Equal-weight deep ensemble | 0.0411 | 0.537 | 0.730 | 85.2% |
 | Flat MLP–Conv1D fusion | 0.0420 | 0.519 | 0.669 | 86.4% |
 | Graph-feature fusion | 0.0450 | 0.460 | 0.677 | 84.1% |
 | Coordinate-point fusion | 0.0534 | 0.275 | 0.384 | 81.8% |
@@ -90,6 +94,22 @@ python src/run_graph_neighbour_sweep.py \
   --output-dir outputs/graph_neighbour_sweep_run
 ```
 
+Run the centre, middle and edge diagnostic models:
+
+```bash
+python src/run_region_aware_fusion.py \
+  --data-dir work/public_data \
+  --output-dir outputs/region_aware_run
+```
+
+Run the mean-shape multi-task model and fixed deep ensemble:
+
+```bash
+python src/run_shape_decomposed_fusion.py \
+  --data-dir work/public_data \
+  --output-dir outputs/shape_decomposed_run
+```
+
 Rebuild the common benchmark and per-fold wafer-level metrics:
 
 ```bash
@@ -109,6 +129,10 @@ python src/run_phase1_benchmark.py
   weighting. Uniform six-neighbour averaging has the best RMSE and mean
   wafer-level R² among these graph variants.
 - `outputs/deep_fusion_2026-09-23/` contains the previous temporal fusion run.
+- `outputs/region_aware_2026-10-07/` contains centre, middle and edge error
+  metrics and the predicted-versus-measured radial diagnostic.
+- `outputs/shape_decomposed_2026-10-07/shape_model_summary.csv` contains the
+  mean-shape model and fixed equal-weight deep-ensemble results.
 
 Progress reports are intentionally excluded from this repository and retained
 locally.

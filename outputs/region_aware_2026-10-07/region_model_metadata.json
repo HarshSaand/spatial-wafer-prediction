@@ -1,0 +1,24 @@
+{
+  "matched_wafers": 88,
+  "lot_counts": {
+    "1": 9,
+    "2": 10,
+    "3": 10,
+    "4": 10,
+    "5": 10,
+    "6": 10,
+    "7": 6,
+    "8": 10,
+    "9": 9,
+    "10": 4
+  },
+  "region_definition": "Equal-count radial groups based on fixed coordinate radius",
+  "region_location_counts": {
+    "centre": 30,
+    "middle": 29,
+    "edge": 29
+  },
+  "edge_loss_weight": 1.5,
+  "validation": "Five-fold out-of-fold wafer validation; preprocessing fitted within each training fold",
+  "seed": 42
+}

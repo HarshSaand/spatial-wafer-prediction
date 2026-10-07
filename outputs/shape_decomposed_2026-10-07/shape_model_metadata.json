@@ -1,0 +1,11 @@
+{
+  "matched_wafers": 88,
+  "architecture": "Six-neighbour graph MLP plus temporal Conv1D with separate mean-change and zero-mean shape-change heads",
+  "shape_loss_weights": [
+    1.0,
+    2.0
+  ],
+  "ensemble": "Fixed 0.5 previous MLP Conv1D plus 0.5 shape-decomposed graph Conv1D; no test-set weight optimization",
+  "validation": "Five-fold out-of-fold wafer validation",
+  "seed": 42
+}
