@@ -1,0 +1,7 @@
+{
+  "architecture": "Two graph-attention layers over a symmetric six-neighbour wafer graph plus temporal 1D CNN and pointwise residual decoder",
+  "matched_wafers": 88,
+  "validation": "Five-fold out-of-fold wafer validation",
+  "seed": 42,
+  "parameters": 17545
+}

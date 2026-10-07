@@ -43,6 +43,7 @@ Files:
 - Mean-shape graph fusion with separate wafer-mean and zero-mean shape heads.
 - Fixed equal-weight ensemble of the flat MLP–Conv1D and mean-shape graph model.
 - Controlled incoming-profile smoothing using a fixed 25% six-neighbour blend.
+- Learnable graph-attention spatial encoder combined with a temporal 1D CNN.
 
 ## Main wafer-level results
 
@@ -51,6 +52,7 @@ Files:
 | Extra Trees fusion | 0.0391 | 0.583 | 0.742 | 92.0% |
 | Equal-weight deep ensemble | 0.0411 | 0.537 | 0.730 | 85.2% |
 | Smoothed equal-weight ensemble | 0.0410 | 0.538 | 0.728 | 86.4% |
+| Graph attention–1D CNN | 0.0540 | 0.272 | 0.516 | 77.3% |
 | Flat MLP–Conv1D fusion | 0.0420 | 0.519 | 0.669 | 86.4% |
 | Graph-feature fusion | 0.0450 | 0.460 | 0.677 | 84.1% |
 | Coordinate-point fusion | 0.0534 | 0.275 | 0.384 | 81.8% |
@@ -120,6 +122,14 @@ python src/run_smoothed_shape_fusion.py \
   --output-dir outputs/smoothed_shape_run
 ```
 
+Run the learnable graph-attention and temporal 1D CNN model:
+
+```bash
+python src/run_graph_attention_fusion.py \
+  --data-dir work/public_data \
+  --output-dir outputs/graph_attention_run
+```
+
 Rebuild the common benchmark and per-fold wafer-level metrics:
 
 ```bash
@@ -145,6 +155,8 @@ python src/run_phase1_benchmark.py
   mean-shape model and fixed equal-weight deep-ensemble results.
 - `outputs/smoothed_shape_2026-10-07/` contains the fixed smoothing test,
   fold metrics, regional metrics and out-of-fold predictions.
+- `outputs/graph_attention_2026-10-07/` contains the graph-attention results,
+  regional metrics and out-of-fold predictions.
 
 Progress reports are intentionally excluded from this repository and retained
 locally.
