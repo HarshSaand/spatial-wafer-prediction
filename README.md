@@ -157,6 +157,8 @@ python src/run_phase1_benchmark.py
   fold metrics, regional metrics and out-of-fold predictions.
 - `outputs/graph_attention_2026-10-07/` contains the graph-attention results,
   regional metrics and out-of-fold predictions.
+- `outputs/individual_wafer_diagnostics_2026-10-07/` contains colour-coded
+  measured, predicted and error maps plus R² and RMSE for every held-out wafer.
 
 Progress reports are intentionally excluded from this repository and retained
 locally.
