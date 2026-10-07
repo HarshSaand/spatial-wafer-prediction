@@ -1,0 +1,7 @@
+{
+  "architecture": "Dual-input hybrid six-neighbour graph MLP plus temporal 1D CNN with mean and shape output heads",
+  "smoothing": "Per-wafer convex blend of raw incoming profile and six-neighbour spatial average",
+  "smoothing_strength": 0.25,
+  "validation": "Five-fold out-of-fold wafer validation; scaling and early stopping fitted within each fold",
+  "seed": 42
+}

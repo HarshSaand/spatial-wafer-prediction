@@ -75,13 +75,14 @@ class ShapeDecomposedGraphFusionNet(nn.Module):
         return mean_change, shape_change
 
 
-def train_fold(spatial, process, target, coordinates, train_idx, test_idx, args, fold, shape_weight):
+def train_fold(spatial, process, target, coordinates, train_idx, test_idx, args, fold, shape_weight, input_spatial=None):
     rng = np.random.default_rng(args.seed + fold)
     shuffled = rng.permutation(train_idx)
     n_val = max(8, round(0.15 * len(train_idx)))
     val_idx, fit_idx = shuffled[:n_val], shuffled[n_val:]
+    model_spatial = spatial if input_spatial is None else input_spatial
     s_fit, s_val, s_test = standardize(
-        spatial[fit_idx], spatial[fit_idx], spatial[val_idx], spatial[test_idx]
+        model_spatial[fit_idx], model_spatial[fit_idx], model_spatial[val_idx], model_spatial[test_idx]
     )
     p_fit, p_val, p_test = standardize(
         process[fit_idx], process[fit_idx], process[val_idx], process[test_idx], axes=(0, 1)
