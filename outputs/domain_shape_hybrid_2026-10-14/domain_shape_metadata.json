@@ -1,0 +1,14 @@
+{
+  "samples": 88,
+  "tree_target": "outgoing minus incoming thickness at 88 locations",
+  "domain_features": [
+    "centre, middle and edge incoming means",
+    "centre, middle and edge incoming standard deviations",
+    "edge minus centre",
+    "middle minus centre",
+    "radial linear coefficient",
+    "radial quadratic coefficient"
+  ],
+  "hybrid": "Fixed 50% deep ensemble and 50% domain residual tree",
+  "validation": "Five-fold wafer-level out-of-fold validation"
+}

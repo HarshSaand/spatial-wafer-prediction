@@ -1,0 +1,12 @@
+{
+  "samples": 88,
+  "input": "88 incoming thickness values plus four summaries for each of 31 process signals",
+  "target": "88 outgoing-minus-incoming thickness values",
+  "reconstruction": "outgoing thickness equals incoming thickness plus predicted change",
+  "validation": "Five-fold shuffled wafer-level out-of-fold validation",
+  "preprocessing": "Training-fold standardization followed by 20-component PCA",
+  "models": [
+    "Gaussian Process with fixed RBF and white-noise kernel",
+    "Multi-output AdaBoost"
+  ]
+}

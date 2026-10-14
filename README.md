@@ -44,11 +44,18 @@ Files:
 - Fixed equal-weight ensemble of the flat MLP–Conv1D and mean-shape graph model.
 - Controlled incoming-profile smoothing using a fixed 25% six-neighbour blend.
 - Learnable graph-attention spatial encoder combined with a temporal 1D CNN.
+- Fixed 50/50 hybrid of the deep ensemble and Extra Trees. The weight is
+  declared before evaluation and is not optimized on held-out wafers.
+- Gaussian Process and AdaBoost residual benchmarks requested in the 7 October review.
+- Domain-informed residual Extra Trees using centre, middle, edge, radial-slope
+  and radial-curvature features, combined 50/50 with the deep ensemble.
 
 ## Main wafer-level results
 
 | Model | RMSE µm | Mean wafer R² | Median wafer R² | Positive wafer R² |
 |---|---:|---:|---:|---:|
+| Fixed domain residual hybrid | 0.0380 | 0.604 | 0.736 | 93.2% |
+| Fixed deep and tree hybrid | 0.0381 | 0.603 | 0.721 | 93.2% |
 | Extra Trees fusion | 0.0391 | 0.583 | 0.742 | 92.0% |
 | Equal-weight deep ensemble | 0.0411 | 0.537 | 0.730 | 85.2% |
 | Smoothed equal-weight ensemble | 0.0410 | 0.538 | 0.728 | 86.4% |
@@ -130,6 +137,38 @@ python src/run_graph_attention_fusion.py \
   --output-dir outputs/graph_attention_run
 ```
 
+Run the fixed deep and tree hybrid:
+
+```bash
+python src/run_deep_tree_hybrid.py \
+  --data-dir work/public_data \
+  --output-dir outputs/deep_tree_hybrid_run
+```
+
+Run the Gaussian Process and AdaBoost residual benchmarks:
+
+```bash
+python src/run_supervisor_requested_benchmarks.py \
+  --data-dir work/public_data \
+  --output-dir outputs/supervisor_requested_benchmarks_run
+```
+
+Run the domain-informed residual hybrid:
+
+```bash
+python src/run_domain_shape_hybrid.py \
+  --data-dir work/public_data \
+  --output-dir outputs/domain_shape_hybrid_run
+```
+
+Create one measured, predicted and error image for every held-out wafer:
+
+```bash
+python src/create_individual_wafer_diagnostics.py \
+  --source outputs/deep_tree_hybrid_run/oof_fixed_50_50_hybrid.npz \
+  --output-dir outputs/individual_wafer_diagnostics_run
+```
+
 Rebuild the common benchmark and per-fold wafer-level metrics:
 
 ```bash
@@ -159,6 +198,14 @@ python src/run_phase1_benchmark.py
   regional metrics and out-of-fold predictions.
 - `outputs/individual_wafer_diagnostics_2026-10-07/` contains colour-coded
   measured, predicted and error maps plus R² and RMSE for every held-out wafer.
+- `outputs/deep_tree_hybrid_2026-10-14/` contains the fixed hybrid comparison,
+  fold metrics, regional metrics, weight sensitivity and out-of-fold predictions.
+- `outputs/supervisor_requested_benchmarks_2026-10-14/` contains the Gaussian
+  Process and AdaBoost residual benchmarks requested during the review.
+- `outputs/domain_shape_hybrid_2026-10-14/` contains the domain-informed
+  residual-tree and fixed hybrid results.
+- `outputs/individual_wafer_diagnostics_2026-10-14/all_wafer_images/` contains
+  one colour-coded image for each of the 88 held-out wafers and an image manifest.
 
 Progress reports are intentionally excluded from this repository and retained
 locally.
